@@ -1,2 +1,2 @@
-# learn-go
+# go-practice
 golang 101
