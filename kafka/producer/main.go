@@ -2,24 +2,31 @@ package main
 
 import (
 	"context"
-	"time"
 
 	kafka "github.com/segmentio/kafka-go"
 )
 
 func main() {
-	topic := "go-test"
-	partition := 0
-	println("-----")
+	w := kafka.NewWriter(kafka.WriterConfig{
+		Brokers:  []string{"localhost:9092"},
+		Topic:    "topic-A",
+		Balancer: &kafka.LeastBytes{},
+	})
 
-	conn, _ := kafka.DialLeader(context.Background(), "tcp", "localhost:9092", topic, partition)
-	println("-----")
-	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
-	conn.WriteMessages(
-		kafka.Message{Value: []byte("one!")},
-		kafka.Message{Value: []byte("two!")},
-		kafka.Message{Value: []byte("three!")},
+	w.WriteMessages(context.Background(),
+		kafka.Message{
+			Key:   []byte("Key-A"),
+			Value: []byte("Hello World!"),
+		},
+		kafka.Message{
+			Key:   []byte("Key-B"),
+			Value: []byte("One!"),
+		},
+		kafka.Message{
+			Key:   []byte("Key-C"),
+			Value: []byte("Two!"),
+		},
 	)
 
-	conn.Close()
+	w.Close()
 }
