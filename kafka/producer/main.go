@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	kafka "github.com/segmentio/kafka-go"
 )
@@ -12,7 +13,7 @@ func main() {
 		Topic:    "topic-A",
 		Balancer: &kafka.LeastBytes{},
 	})
-
+	fmt.Printf("---begin produce---\n")
 	w.WriteMessages(context.Background(),
 		kafka.Message{
 			Key:   []byte("Key-A"),
@@ -27,6 +28,6 @@ func main() {
 			Value: []byte("Two!"),
 		},
 	)
-
+	fmt.Printf("---end produce---\n")
 	w.Close()
 }
