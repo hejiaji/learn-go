@@ -14,7 +14,7 @@ func main() {
 		Balancer: &kafka.LeastBytes{},
 	})
 	fmt.Printf("---begin produce---\n")
-	w.WriteMessages(context.Background(),
+	err := w.WriteMessages(context.Background(),
 		kafka.Message{
 			Key:   []byte("Key-A"),
 			Value: []byte("Hello World!"),
@@ -28,6 +28,10 @@ func main() {
 			Value: []byte("Two!"),
 		},
 	)
+	if err != nil {
+		fmt.Printf("----error: %s----", err)
+	}
+
 	fmt.Printf("---end produce---\n")
 	w.Close()
 }

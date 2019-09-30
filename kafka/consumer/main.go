@@ -16,6 +16,9 @@ func main() {
 		MinBytes: 10e3, // 10KB
 		MaxBytes: 10e6, // 10MB
 	})
+
+	defer r.Close()
+
 	fmt.Printf("---begin consumer---\n")
 	for {
 		m, err := r.ReadMessage(context.Background())
@@ -27,5 +30,4 @@ func main() {
 		fmt.Printf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value))
 	}
 	fmt.Printf("---end consumer---\n")
-	r.Close()
 }
