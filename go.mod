@@ -11,7 +11,6 @@ require (
 	github.com/segmentio/kafka-go v0.3.3
 	github.com/tylertreat/bench v0.0.0-20170911233726-eb938b1b5e35
 	github.com/tylertreat/hdrhistogram-writer v0.0.0-20180430173243-73b8d31ba571 // indirect
-	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
-	golang.org/x/text v0.3.2 // indirect
+	golang.org/x/text v0.3.8 // indirect
 	golang.org/x/time v0.0.0-20190921001708-c4c64cad1fd0 // indirect
 )
